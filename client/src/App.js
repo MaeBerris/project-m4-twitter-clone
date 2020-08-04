@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Bookmarks from "./Bookmarks";
-import HomeFeed from "./HomeFeed";
-import Notifications from "./Notifications";
-import TweetDetails from "./TweetDetails";
-import Profile from "./Profile";
-import GlobalStyle from "./GlobalStyles";
+import Bookmarks from "./components/Bookmarks";
+import HomeFeed from "./components/HomeFeed";
+import Notifications from "./components/Notifications";
+import TweetDetails from "./components/TweetDetails";
+import Profile from "./components/Profile";
+import GlobalStyle from "./components/GlobalStyles";
 import Sidebar from "./components/Sidebar";
 
 function App() {

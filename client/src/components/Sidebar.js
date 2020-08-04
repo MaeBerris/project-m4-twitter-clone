@@ -58,7 +58,7 @@ const SecondWrapper = styled.div`
 const LinkWrapper = styled(NavLink)`
   display: flex;
   align-items: center;
-  margin: 15px 0;
+  margin: 10px 0;
   text-decoration: none;
   padding: 10px;
   color: black;
