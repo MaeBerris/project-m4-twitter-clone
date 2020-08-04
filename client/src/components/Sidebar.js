@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../assets/logo.svg";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FiHome, FiUser, FiBell, FiBookmark } from "react-icons/fi";
 import COLORS from "../constants";
 
@@ -10,21 +10,21 @@ const Sidebar = () => {
     <Wrapper>
       <SecondWrapper>
         <StyledLogo width="60px" />
-        <LinkWrapper>
+        <LinkWrapper exact to="/">
           <FiHome width="60px" />
-          <StyledLink to="/">Home</StyledLink>
+          <StyledLinkText>Home</StyledLinkText>
         </LinkWrapper>
-        <LinkWrapper>
+        <LinkWrapper to="/profile">
           <FiUser width="60px" />
-          <StyledLink to="/profile">Profile</StyledLink>
+          <StyledLinkText>Profile</StyledLinkText>
         </LinkWrapper>
-        <LinkWrapper>
+        <LinkWrapper to="/notifications">
           <FiBell width="60px" />
-          <StyledLink to="/notifications">Notifications</StyledLink>
+          <StyledLinkText>Notifications</StyledLinkText>
         </LinkWrapper>
-        <LinkWrapper>
+        <LinkWrapper to="/bookmarks">
           <FiBookmark width="60px" />
-          <StyledLink to="/bookmarks">Bookmarks</StyledLink>
+          <StyledLinkText>Bookmarks</StyledLinkText>
         </LinkWrapper>
         <StyledButton>Meow</StyledButton>
       </SecondWrapper>
@@ -50,19 +50,30 @@ const StyledLogo = styled(Logo)`
 
 const SecondWrapper = styled.div`
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   padding: 10px 10px;
 `;
 
-const LinkWrapper = styled.div`
+const LinkWrapper = styled(NavLink)`
   display: flex;
   align-items: center;
   margin: 15px 0;
-`;
-const StyledLink = styled(Link)`
-  margin-left: 20px;
   text-decoration: none;
+  padding: 10px;
   color: black;
+
+  &.active {
+    color: ${COLORS.primary};
+  }
+
+  &:hover {
+    background-color: ${COLORS.primaryBrighter};
+    border-radius: 20px;
+  }
+`;
+const StyledLinkText = styled.span`
+  margin-left: 20px;
   font-weight: 600;
 `;
 
@@ -74,5 +85,6 @@ const StyledButton = styled.button`
   border-radius: 20px;
   margin: 15px 0;
   font-weight: 600;
+  width: 100%;
 `;
 export default Sidebar;

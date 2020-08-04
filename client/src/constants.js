@@ -1,6 +1,6 @@
 const COLORS = {
   primary: "hsl(258deg, 100%, 50%)",
-  primaryBrighter: "#964CFF",
+  primaryBrighter: "#B799FF",
   divider: "rgb(230, 236, 240)",
 };
 
