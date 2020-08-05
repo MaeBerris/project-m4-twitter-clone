@@ -8,14 +8,17 @@ import TweetDetails from "./components/TweetDetails";
 import Profile from "./components/Profile";
 import GlobalStyle from "./components/GlobalStyles";
 import Sidebar from "./components/Sidebar";
+import { CurrentUserContext } from "./CurrentUserContext";
 
 function App() {
+  const { currentUser, status } = React.useContext(CurrentUserContext);
   return (
     <Router>
       <Wrapper>
         <Sidebar />
         <Switch>
           <Route exact path="/">
+            {status === "loading" ? <div>LOADING</div> : <h1>FINISHED</h1>}
             <HomeFeed />
           </Route>
 
