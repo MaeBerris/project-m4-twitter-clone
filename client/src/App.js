@@ -18,7 +18,6 @@ function App() {
         <Sidebar />
         <Switch>
           <Route exact path="/">
-            {status === "loading" ? <div>LOADING</div> : <h1>FINISHED</h1>}
             <HomeFeed />
           </Route>
 

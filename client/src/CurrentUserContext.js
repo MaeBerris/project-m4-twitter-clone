@@ -14,12 +14,10 @@ export const CurrentUserContextProvider = ({ children }) => {
       },
     })
       .then((res) => {
-        console.log(res.status);
         return res.json();
       })
       .then((data) => {
         const profile = data.profile;
-        console.log(profile);
         setCurrentUser(profile);
         setStatus("idle");
       })
