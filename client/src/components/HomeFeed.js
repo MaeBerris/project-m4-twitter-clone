@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import SmallTweet from "./SmallTweet";
+import { HomeFeedContext } from "../HomeFeedContext";
 
 const HomeFeed = () => {
-  const [feed, setFeed] = React.useState(null);
-  const [feedStatus, setFeedStatus] = React.useState("loading");
+  const { feed, setFeed, setFeedStatus } = React.useContext(HomeFeedContext);
+
   React.useEffect(() => {
     fetch("api/me/home-feed", {
       method: "GET",

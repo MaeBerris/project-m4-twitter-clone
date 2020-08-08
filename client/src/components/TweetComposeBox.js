@@ -2,12 +2,42 @@ import React from "react";
 import styled from "styled-components/macro";
 import { CurrentUserContext } from "../CurrentUserContext";
 import COLORS from "../constants";
+import { HomeFeedContext } from "../HomeFeedContext";
 
 const TweetComposeBox = () => {
   const { currentUser } = React.useContext(CurrentUserContext);
   const [numOfLetters, setNumOfLetters] = React.useState(280);
   const [color, setColor] = React.useState("grey");
   const [value, setValue] = React.useState("");
+  const { setFeed } = React.useContext(HomeFeedContext);
+
+  const FetchRequest = () => {
+    fetch("api/tweet", {
+      method: "POST",
+      body: JSON.stringify({
+        status: value,
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        return fetch("/api/me/home-feed", {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setFeed(data);
+            setValue("");
+          });
+      });
+  };
 
   return (
     <Wrapper>
@@ -35,7 +65,7 @@ const TweetComposeBox = () => {
         {numOfLetters < 0 ? (
           <DisabledButton disabled>Meow</DisabledButton>
         ) : (
-          <StyledButton>Meow</StyledButton>
+          <StyledButton onClick={FetchRequest}>Meow</StyledButton>
         )}
       </ButtonArea>
     </Wrapper>
