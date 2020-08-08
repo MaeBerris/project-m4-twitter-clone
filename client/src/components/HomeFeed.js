@@ -4,7 +4,9 @@ import SmallTweet from "./SmallTweet";
 import { HomeFeedContext } from "../HomeFeedContext";
 
 const HomeFeed = () => {
-  const { feed, setFeed, setFeedStatus } = React.useContext(HomeFeedContext);
+  const { feed, setFeed, setFeedStatus, feedStatus } = React.useContext(
+    HomeFeedContext
+  );
 
   React.useEffect(() => {
     fetch("api/me/home-feed", {
@@ -20,11 +22,15 @@ const HomeFeed = () => {
         setFeedStatus("idle");
       })
       .catch((err) => console.log(err));
+
+    return () => {
+      setFeedStatus("loading");
+    };
   }, []);
 
   return (
     <Wrapper>
-      {feed && (
+      {feedStatus === "idle" && (
         <div>
           {feed.tweetIds.map((tweetId, index) => {
             const tweetData = feed.tweetsById[tweetId];

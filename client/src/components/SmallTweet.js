@@ -12,9 +12,7 @@ const SmallTweet = ({ tweetData }) => {
   const date = format(new Date(tweetData.timestamp), "LLL do");
   const [isLiked, setIsLiked] = React.useState(tweetData.isLiked);
   const [numberOfLikes, setNumberOfLikes] = React.useState(tweetData.numLikes);
-  const [numberOfRetweets, setNumberOfRetweets] = React.useState(
-    tweetData.numRetweets
-  );
+  const [numberOfRetweets] = React.useState(tweetData.numRetweets);
   let history = useHistory();
 
   function ClickLink() {

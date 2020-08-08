@@ -36,7 +36,7 @@ const ActionBar = ({
               setNumberOfLikes(numberOfLikes + 1);
               setIsLiked(!isLiked);
             }
-            fetch(`api/tweet/${tweetId}/like`, {
+            fetch(`/api/tweet/${tweetId}/like`, {
               method: "PUT",
               body: JSON.stringify({
                 like: valueToSet,

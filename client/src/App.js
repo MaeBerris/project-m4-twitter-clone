@@ -12,20 +12,12 @@ import TweetComposeBox from "./components/TweetComposeBox";
 import { CurrentUserContext } from "./CurrentUserContext";
 
 function App() {
-  const { currentUser, status } = React.useContext(CurrentUserContext);
+  const { status } = React.useContext(CurrentUserContext);
   return (
     <Router>
       <Wrapper>
         <Sidebar />
         <Switch>
-          <Route exact path="/">
-            <div>
-              {status !== "loading" ? <TweetComposeBox /> : null}
-
-              <HomeFeed />
-            </div>
-          </Route>
-
           <Route path="/notifications">
             <Notifications />
           </Route>
@@ -40,6 +32,13 @@ function App() {
 
           <Route path="/:profileId">
             <Profile />
+          </Route>
+
+          <Route exact path="/">
+            <div>
+              {status !== "loading" ? <TweetComposeBox /> : null}
+              {status !== "loading" ? <HomeFeed /> : null}
+            </div>
           </Route>
         </Switch>
       </Wrapper>

@@ -19,7 +19,7 @@ const TweetDetails = () => {
         setTweetData(tweetInfo);
         setStatus("idle");
       });
-  }, []);
+  }, [tweetId]);
   return (
     <div>
       {status !== "loading" ? (
