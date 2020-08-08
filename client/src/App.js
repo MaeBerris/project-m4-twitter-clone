@@ -8,6 +8,7 @@ import TweetDetails from "./components/TweetDetails";
 import Profile from "./components/Profile";
 import GlobalStyle from "./components/GlobalStyles";
 import Sidebar from "./components/Sidebar";
+import TweetBox from "./components/TweetBox";
 import { CurrentUserContext } from "./CurrentUserContext";
 
 function App() {
@@ -18,7 +19,10 @@ function App() {
         <Sidebar />
         <Switch>
           <Route exact path="/">
-            <HomeFeed />
+            <div>
+              <TweetBox />
+              <HomeFeed />
+            </div>
           </Route>
 
           <Route path="/notifications">

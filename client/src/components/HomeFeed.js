@@ -15,8 +15,8 @@ const HomeFeed = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setFeedStatus("idle");
         setFeed(data);
+        setFeedStatus("idle");
       })
       .catch((err) => console.log(err));
   }, []);
@@ -38,6 +38,7 @@ const HomeFeed = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 60%;
 `;
 
 export default HomeFeed;
