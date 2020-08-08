@@ -38,7 +38,6 @@ const HomeFeed = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 60%;
 `;
 
 export default HomeFeed;

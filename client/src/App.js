@@ -8,7 +8,7 @@ import TweetDetails from "./components/TweetDetails";
 import Profile from "./components/Profile";
 import GlobalStyle from "./components/GlobalStyles";
 import Sidebar from "./components/Sidebar";
-import TweetBox from "./components/TweetBox";
+import TweetComposeBox from "./components/TweetComposeBox";
 import { CurrentUserContext } from "./CurrentUserContext";
 
 function App() {
@@ -20,7 +20,8 @@ function App() {
         <Switch>
           <Route exact path="/">
             <div>
-              <TweetBox />
+              {status !== "loading" ? <TweetComposeBox /> : null}
+
               <HomeFeed />
             </div>
           </Route>
@@ -49,6 +50,6 @@ function App() {
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 275px 1fr;
+  grid-template-columns: 275px minmax(400px, 50%);
 `;
 export default App;
