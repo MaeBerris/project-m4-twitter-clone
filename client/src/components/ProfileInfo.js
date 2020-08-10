@@ -9,7 +9,7 @@ const ProfileInfo = () => {
   const { profileData } = React.useContext(ProfileContext);
   const { profile } = profileData;
   return (
-    <div>
+    <BigWrapper>
       <Banner src={profile.bannerSrc} />
       <Wrapper>
         <InfoWrapper>
@@ -27,11 +27,15 @@ const ProfileInfo = () => {
           <Page>Likes</Page>
         </Footer>
       </Wrapper>
-    </div>
+    </BigWrapper>
   );
 };
 
 export default ProfileInfo;
+
+const BigWrapper = styled.div`
+  margin-bottom: 85px;
+`;
 
 const Wrapper = styled.div`
   display: flex;

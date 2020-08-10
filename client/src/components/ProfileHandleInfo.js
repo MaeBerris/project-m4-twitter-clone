@@ -32,4 +32,6 @@ const FollowStatus = styled.span`
   background-color: lightgrey;
   color: grey;
   border-radius: 3px;
+  margin-left: 10px;
+  font-size: 0.9em;
 `;

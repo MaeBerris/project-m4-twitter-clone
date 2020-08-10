@@ -23,7 +23,7 @@ const ProfileContextProvider = ({ children }) => {
 
   return (
     <ProfileContext.Provider
-      value={{ status, setStatus, profileData, setProfileData }}
+      value={{ status, setStatus, profileData, setProfileData, profileId }}
     >
       {children}
     </ProfileContext.Provider>

@@ -3,31 +3,38 @@ import styled from "styled-components";
 import SmallTweet from "./SmallTweet";
 import { HomeFeedContext } from "../HomeFeedContext";
 import Spinner from "./Spinner";
+import useSetFeed from "../useSetFeed.hook";
 
-const HomeFeed = () => {
+const HomeFeed = ({ url }) => {
   const { feed, setFeed, setFeedStatus, feedStatus } = React.useContext(
     HomeFeedContext
   );
 
-  React.useEffect(() => {
-    fetch("api/me/home-feed", {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setFeed(data);
-        setFeedStatus("idle");
-      })
-      .catch((err) => console.log(err));
+  useSetFeed({
+    url: url,
+    dataSettingFunction: setFeed,
+    statusSettingFunction: setFeedStatus,
+  });
 
-    return () => {
-      setFeedStatus("loading");
-    };
-  }, []);
+  // React.useEffect(() => {
+  //   fetch("/api/me/home-feed", {
+  //     method: "GET",
+  //     headers: {
+  //       accept: "application/json",
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setFeed(data);
+  //       setFeedStatus("idle");
+  //     })
+  //     .catch((err) => console.log(err));
+
+  //   return () => {
+  //     setFeedStatus("loading");
+  //   };
+  // }, []);
 
   return (
     <Wrapper>

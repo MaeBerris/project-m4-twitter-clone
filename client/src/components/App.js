@@ -43,7 +43,9 @@ function App() {
             <Route exact path="/">
               <div>
                 {status !== "loading" ? <TweetComposeBox /> : <Spinner />}
-                {status !== "loading" ? <HomeFeed /> : null}
+                {status !== "loading" ? (
+                  <HomeFeed url="/api/me/home-feed" />
+                ) : null}
               </div>
             </Route>
           </Switch>
