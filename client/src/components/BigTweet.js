@@ -43,7 +43,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
-  border-right: 1px solid ${COLORS.divider};
   border-bottom: 1px solid ${COLORS.divider};
 `;
 const Header = styled.header`

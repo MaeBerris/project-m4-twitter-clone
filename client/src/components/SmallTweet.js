@@ -75,7 +75,6 @@ const SmallTweet = ({ tweetData }) => {
 
 const TweetWrapper = styled.div`
   border-bottom: 1px solid ${COLORS.divider};
-  border-right: 1px solid ${COLORS.divider};
   padding: 5px;
 `;
 

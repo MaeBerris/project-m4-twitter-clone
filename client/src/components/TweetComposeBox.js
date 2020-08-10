@@ -83,7 +83,6 @@ const TweetComposeBox = () => {
 
 const Wrapper = styled.div`
   border-bottom: 5px solid ${COLORS.divider};
-  border-right: 1px solid ${COLORS.divider};
   padding: 10px;
   display: grid;
   grid-template-columns: 50px 1fr 120px;
