@@ -10,6 +10,7 @@ import GlobalStyle from "./components/GlobalStyles";
 import Sidebar from "./components/Sidebar";
 import TweetComposeBox from "./components/TweetComposeBox";
 import { CurrentUserContext } from "./CurrentUserContext";
+import Spinner from "./components/Spinner";
 
 function App() {
   const { status } = React.useContext(CurrentUserContext);
@@ -36,7 +37,7 @@ function App() {
 
           <Route exact path="/">
             <div>
-              {status !== "loading" ? <TweetComposeBox /> : null}
+              {status !== "loading" ? <TweetComposeBox /> : <Spinner />}
               {status !== "loading" ? <HomeFeed /> : null}
             </div>
           </Route>

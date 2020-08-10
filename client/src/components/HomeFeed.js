@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SmallTweet from "./SmallTweet";
 import { HomeFeedContext } from "../HomeFeedContext";
+import Spinner from "./Spinner";
 
 const HomeFeed = () => {
   const { feed, setFeed, setFeedStatus, feedStatus } = React.useContext(
@@ -30,13 +31,15 @@ const HomeFeed = () => {
 
   return (
     <Wrapper>
-      {feedStatus === "idle" && (
+      {feedStatus === "idle" ? (
         <div>
           {feed.tweetIds.map((tweetId, index) => {
             const tweetData = feed.tweetsById[tweetId];
             return <SmallTweet key={tweetId + index} tweetData={tweetData} />;
           })}
         </div>
+      ) : (
+        <Spinner />
       )}
     </Wrapper>
   );

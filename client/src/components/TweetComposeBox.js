@@ -28,6 +28,7 @@ const TweetComposeBox = () => {
       .then((res) => res.json())
       .then((data) => {
         setValue("");
+        setNumOfLetters(280);
         setLoadState("idle");
         return data;
       })
