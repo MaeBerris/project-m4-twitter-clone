@@ -10,8 +10,11 @@ const TweetComposeBox = () => {
   const [color, setColor] = React.useState("grey");
   const [value, setValue] = React.useState("");
   const { setFeed } = React.useContext(HomeFeedContext);
+  const [loadState, setLoadState] = React.useState("idle");
 
   const FetchRequest = () => {
+    setLoadState("loading");
+
     fetch("api/tweet", {
       method: "POST",
       body: JSON.stringify({
@@ -24,6 +27,11 @@ const TweetComposeBox = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setValue("");
+        setLoadState("idle");
+        return data;
+      })
+      .then((data) => {
         console.log(data);
         return fetch("/api/me/home-feed", {
           method: "GET",
@@ -34,7 +42,6 @@ const TweetComposeBox = () => {
           .then((res) => res.json())
           .then((data) => {
             setFeed(data);
-            setValue("");
           });
       });
   };
@@ -44,6 +51,7 @@ const TweetComposeBox = () => {
       <Avatar src={currentUser.avatarSrc} />
       <form>
         <TextInput
+          placeholder="What's happening ?"
           value={value}
           onChange={(ev) => {
             setValue(ev.target.value);
@@ -62,7 +70,7 @@ const TweetComposeBox = () => {
       </form>
       <ButtonArea>
         <NumberDisplay style={{ color: color }}>{numOfLetters}</NumberDisplay>
-        {numOfLetters < 0 ? (
+        {numOfLetters < 0 || loadState === "loading" ? (
           <DisabledButton disabled>Meow</DisabledButton>
         ) : (
           <StyledButton onClick={FetchRequest}>Meow</StyledButton>
@@ -111,6 +119,7 @@ const StyledButton = styled.button`
   border-radius: 20px;
   padding: 10px;
   width: 50%;
+  cursor: pointer;
 `;
 
 const DisabledButton = styled.button`
@@ -122,7 +131,7 @@ const DisabledButton = styled.button`
   padding: 10px;
   width: 50%;
   opacity: 55%;
-  cursor: none;
+  cursor: default;
 `;
 
 const NumberDisplay = styled.span`

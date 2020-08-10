@@ -20,6 +20,7 @@ const SmallTweet = ({ tweetData }) => {
   }
   return (
     <TweetWrapper
+      aria-label="View Tweet"
       tabIndex="0"
       onClick={ClickLink}
       onKeyDown={(ev) => {
@@ -31,7 +32,7 @@ const SmallTweet = ({ tweetData }) => {
       {tweetData.retweetFrom && (
         <Retweet>
           <RetweetIcon />
-          {tweetData.retweetFrom.handle} Retweeted
+          {tweetData.retweetFrom.handle}
         </Retweet>
       )}
       <Wrapper>
@@ -64,7 +65,7 @@ const SmallTweet = ({ tweetData }) => {
             numberOfLikes={numberOfLikes}
             setNumberOfLikes={setNumberOfLikes}
             tweetId={tweetData.id}
-            numberOfRetweet={numberOfRetweets}
+            numberOfRetweets={numberOfRetweets}
           />
         </TweetBody>
       </Wrapper>

@@ -44,6 +44,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding: 15px;
   border-right: 1px solid ${COLORS.divider};
+  border-bottom: 1px solid ${COLORS.divider};
 `;
 const Header = styled.header`
   display: flex;
