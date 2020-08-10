@@ -13,9 +13,10 @@ import { CurrentUserContext } from "../CurrentUserContext";
 import Spinner from "./Spinner";
 import ProfileContextProvider from "../ProfileContext";
 import COLORS from "../constants";
+import ErrorScreen from "./ErrorScreen";
 
 function App() {
-  const { status } = React.useContext(CurrentUserContext);
+  const { status, error } = React.useContext(CurrentUserContext);
   return (
     <Router>
       <Wrapper>
@@ -41,12 +42,16 @@ function App() {
             </Route>
 
             <Route exact path="/">
-              <div>
-                {status !== "loading" ? <TweetComposeBox /> : <Spinner />}
-                {status !== "loading" ? (
-                  <HomeFeed url="/api/me/home-feed" />
-                ) : null}
-              </div>
+              {error === true ? (
+                <ErrorScreen />
+              ) : (
+                <div>
+                  {status !== "loading" ? <TweetComposeBox /> : <Spinner />}
+                  {status !== "loading" ? (
+                    <HomeFeed url="/api/me/home-feed" />
+                  ) : null}
+                </div>
+              )}
             </Route>
           </Switch>
         </Main>

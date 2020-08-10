@@ -14,7 +14,7 @@ const Sidebar = () => {
           <FiHome width="60px" />
           <StyledLinkText>Home</StyledLinkText>
         </LinkWrapper>
-        <LinkWrapper to="/profile">
+        <LinkWrapper to="/treasurymog">
           <FiUser width="60px" />
           <StyledLinkText>Profile</StyledLinkText>
         </LinkWrapper>
