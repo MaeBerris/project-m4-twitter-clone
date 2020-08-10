@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import COLORS from "../constants";
+import ProfileHandleInfo from "./ProfileHandleInfo";
+import { ProfileContext } from "../ProfileContext";
 
-const ProfileInfo = ({ profileData }) => {
+const ProfileInfo = () => {
+  const { profileData } = React.useContext(ProfileContext);
   const { profile } = profileData;
   return (
     <Wrapper>
@@ -12,6 +15,7 @@ const ProfileInfo = ({ profileData }) => {
           <Avatar src={profile.avatarSrc} />
           <StyledButton>Follow</StyledButton>
         </TopWrapper>
+        <ProfileHandleInfo />
       </InfoWrapper>
     </Wrapper>
   );
@@ -35,6 +39,7 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
+  margin: -85px 0;
 `;
 
 const TopWrapper = styled.div`
@@ -42,7 +47,7 @@ const TopWrapper = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   z-index: 1;
-  margin: -65px 0;
+  margin: 15px 0;
 `;
 
 const Avatar = styled.img`

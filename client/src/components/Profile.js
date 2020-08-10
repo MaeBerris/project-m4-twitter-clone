@@ -1,34 +1,11 @@
 import React from "react";
 import Styled from "styled-components";
-import { useParams } from "react-router-dom";
 import ProfileInfo from "./ProfileInfo";
+import { ProfileContext } from "../ProfileContext";
 
 const Profile = () => {
-  const { profileId } = useParams();
-  const [status, setStatus] = React.useState("loading");
-  const [profileData, setProfileData] = React.useState(null);
-  React.useEffect(() => {
-    fetch(`api/${profileId}/profile`, {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setProfileData(data);
-        setStatus("idle");
-      });
-  }, []);
-  return (
-    <div>
-      {status === "idle" ? (
-        <ProfileInfo profileData={profileData} />
-      ) : (
-        <div>loading</div>
-      )}
-    </div>
-  );
+  const { status } = React.useContext(ProfileContext);
+  return <div>{status === "idle" ? <ProfileInfo /> : <div>loading</div>}</div>;
 };
 
 export default Profile;

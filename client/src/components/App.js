@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Bookmarks from "./components/Bookmarks";
-import HomeFeed from "./components/HomeFeed";
-import Notifications from "./components/Notifications";
-import TweetDetails from "./components/TweetDetails";
-import Profile from "./components/Profile";
-import GlobalStyle from "./components/GlobalStyles";
-import Sidebar from "./components/Sidebar";
-import TweetComposeBox from "./components/TweetComposeBox";
-import { CurrentUserContext } from "./CurrentUserContext";
-import Spinner from "./components/Spinner";
+import Bookmarks from "./Bookmarks";
+import HomeFeed from "./HomeFeed";
+import Notifications from "./Notifications";
+import TweetDetails from "./TweetDetails";
+import Profile from "./Profile";
+import GlobalStyle from "./GlobalStyles";
+import Sidebar from "./Sidebar";
+import TweetComposeBox from "./TweetComposeBox";
+import { CurrentUserContext } from "../CurrentUserContext";
+import Spinner from "./Spinner";
+import ProfileContextProvider from "../ProfileContext";
 
 function App() {
   const { status } = React.useContext(CurrentUserContext);
@@ -32,7 +33,9 @@ function App() {
           </Route>
 
           <Route path="/:profileId">
-            <Profile />
+            <ProfileContextProvider>
+              <Profile />
+            </ProfileContextProvider>
           </Route>
 
           <Route exact path="/">
