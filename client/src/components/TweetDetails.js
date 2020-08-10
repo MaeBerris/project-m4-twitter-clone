@@ -1,6 +1,7 @@
 import React from "react";
 import BigTweet from "./BigTweet";
 import { useParams } from "react-router-dom";
+import Spinner from "./Spinner";
 
 const TweetDetails = () => {
   let { tweetId } = useParams();
@@ -25,7 +26,7 @@ const TweetDetails = () => {
       {status !== "loading" ? (
         <BigTweet tweetData={tweetData}></BigTweet>
       ) : (
-        <div> loading </div>
+        <Spinner />
       )}
     </div>
   );

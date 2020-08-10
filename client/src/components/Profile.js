@@ -19,7 +19,7 @@ const Profile = () => {
         setProfileData(data);
         setStatus("idle");
       });
-  });
+  }, []);
   return (
     <div>
       {status === "idle" ? (

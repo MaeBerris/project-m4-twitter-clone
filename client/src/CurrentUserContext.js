@@ -7,7 +7,7 @@ export const CurrentUserContextProvider = ({ children }) => {
   const [status, setStatus] = React.useState("loading");
 
   React.useEffect(() => {
-    fetch("api/me/profile", {
+    fetch("/api/me/profile", {
       method: "GET",
       headers: {
         accept: "application/json",
