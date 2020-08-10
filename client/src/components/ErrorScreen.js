@@ -5,11 +5,11 @@ import { Icon } from "react-icons-kit";
 
 const IconBomb = () => <Icon icon={Bomb} size={55} />;
 
-const ErrorScreen = () => {
+const ErrorScreen = ({ errorType }) => {
   return (
     <Wrapper>
       <StyledIcon />
-      <StyledStatus>An unknown error has occured.</StyledStatus>
+      <StyledStatus>{`A ${errorType} error has occured.`}</StyledStatus>
       <StyledMessage>
         Please try refreshing the page or contact support if the problem
         persists
@@ -18,12 +18,14 @@ const ErrorScreen = () => {
   );
 };
 export default ErrorScreen;
+
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 100%;
 `;
 
 const StyledIcon = styled(IconBomb)`

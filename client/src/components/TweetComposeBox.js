@@ -3,17 +3,22 @@ import styled from "styled-components/macro";
 import { CurrentUserContext } from "../CurrentUserContext";
 import COLORS from "../constants";
 import { HomeFeedContext } from "../HomeFeedContext";
+import SmallError from "./SmallError";
 
 const TweetComposeBox = () => {
   const { currentUser } = React.useContext(CurrentUserContext);
   const [numOfLetters, setNumOfLetters] = React.useState(280);
   const [color, setColor] = React.useState("grey");
   const [value, setValue] = React.useState("");
-  const { setFeed } = React.useContext(HomeFeedContext);
+  const [error, setError] = React.useState(false);
+  const { setFeed, setFeedError } = React.useContext(HomeFeedContext);
   const [loadState, setLoadState] = React.useState("idle");
+  const message =
+    "I'm sorry, something went wrong while sending your tweet, please try again !";
 
   const FetchRequest = () => {
     setLoadState("loading");
+    setError(false);
 
     fetch("api/tweet", {
       method: "POST",
@@ -25,13 +30,21 @@ const TweetComposeBox = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          setLoadState("idle");
+          setError(true);
+          throw Error("Tweet post server error");
+        }
+        return res.json();
+      })
       .then((data) => {
         setValue("");
         setNumOfLetters(280);
         setLoadState("idle");
         return data;
       })
+      .catch((err) => console.log(err))
       .then((data) => {
         console.log(data);
         return fetch("/api/me/home-feed", {
@@ -40,49 +53,59 @@ const TweetComposeBox = () => {
             accept: "application/json",
           },
         })
-          .then((res) => res.json())
+          .then((res) => {
+            setFeedError(true);
+            return res.json();
+          })
           .then((data) => {
             setFeed(data);
-          });
+          })
+          .catch((err) => console.log(err));
       });
   };
 
   return (
     <Wrapper>
-      <Avatar src={currentUser.avatarSrc} />
-      <form>
-        <TextInput
-          placeholder="What's happening ?"
-          value={value}
-          onChange={(ev) => {
-            setValue(ev.target.value);
-            setNumOfLetters(280 - ev.target.value.length);
-            setColor("grey");
-            if (
-              280 - ev.target.value.length < 55 &&
-              280 - ev.target.value.length >= 0
-            ) {
-              setColor("yellow");
-            } else if (280 - ev.target.value.length < 0) {
-              setColor("red");
-            }
-          }}
-        />
-      </form>
-      <ButtonArea>
-        <NumberDisplay style={{ color: color }}>{numOfLetters}</NumberDisplay>
-        {numOfLetters < 0 || loadState === "loading" ? (
-          <DisabledButton disabled>Meow</DisabledButton>
-        ) : (
-          <StyledButton onClick={FetchRequest}>Meow</StyledButton>
-        )}
-      </ButtonArea>
+      <ComposeBoxWrapper>
+        <Avatar src={currentUser.avatarSrc} />
+        <form>
+          <TextInput
+            placeholder="What's happening ?"
+            value={value}
+            onChange={(ev) => {
+              setValue(ev.target.value);
+              setNumOfLetters(280 - ev.target.value.length);
+              setColor("grey");
+              if (
+                280 - ev.target.value.length < 55 &&
+                280 - ev.target.value.length >= 0
+              ) {
+                setColor("yellow");
+              } else if (280 - ev.target.value.length < 0) {
+                setColor("red");
+              }
+            }}
+          />
+        </form>
+        <ButtonArea>
+          <NumberDisplay style={{ color: color }}>{numOfLetters}</NumberDisplay>
+          {numOfLetters < 0 || loadState === "loading" ? (
+            <DisabledButton disabled>Meow</DisabledButton>
+          ) : (
+            <StyledButton onClick={FetchRequest}>Meow</StyledButton>
+          )}
+        </ButtonArea>
+      </ComposeBoxWrapper>
+      {error && <SmallError message={message} />}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   border-bottom: 5px solid ${COLORS.divider};
+`;
+
+const ComposeBoxWrapper = styled.div`
   padding: 10px;
   display: grid;
   grid-template-columns: 50px 1fr 120px;

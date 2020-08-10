@@ -5,6 +5,7 @@ export const HomeFeedContext = React.createContext(null);
 const HomeFeedContextProvider = ({ children }) => {
   const [feed, setFeed] = React.useState("loading");
   const [feedStatus, setFeedStatus] = React.useState("loading");
+  const [error, setFeedError] = React.useState(false);
 
   return (
     <HomeFeedContext.Provider
@@ -14,6 +15,8 @@ const HomeFeedContextProvider = ({ children }) => {
         feedStatus,
         setFeedStatus,
         feedStatus,
+        error,
+        setFeedError,
       }}
     >
       {children}

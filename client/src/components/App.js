@@ -43,7 +43,7 @@ function App() {
 
             <Route exact path="/">
               {error === true ? (
-                <ErrorScreen />
+                <ErrorScreen errorType="profile loading" />
               ) : (
                 <div>
                   {status !== "loading" ? <TweetComposeBox /> : <Spinner />}
