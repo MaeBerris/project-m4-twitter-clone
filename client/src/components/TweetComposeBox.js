@@ -20,7 +20,7 @@ const TweetComposeBox = () => {
     setLoadState("loading");
     setError(false);
 
-    fetch("api/tweet", {
+    fetch("/api/tweet", {
       method: "POST",
       body: JSON.stringify({
         status: value,
@@ -32,6 +32,7 @@ const TweetComposeBox = () => {
     })
       .then((res) => {
         if (!res.ok) {
+          console.log(res.status);
           setLoadState("idle");
           setError(true);
           throw Error("Tweet post server error");
@@ -54,7 +55,10 @@ const TweetComposeBox = () => {
           },
         })
           .then((res) => {
-            setFeedError(true);
+            if (!res.ok) {
+              setFeedError(true);
+              throw Error("Feed loading error");
+            }
             return res.json();
           })
           .then((data) => {

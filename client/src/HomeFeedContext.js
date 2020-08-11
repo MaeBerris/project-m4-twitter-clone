@@ -14,7 +14,6 @@ const HomeFeedContextProvider = ({ children }) => {
         setFeed,
         feedStatus,
         setFeedStatus,
-        feedStatus,
         error,
         setFeedError,
       }}
