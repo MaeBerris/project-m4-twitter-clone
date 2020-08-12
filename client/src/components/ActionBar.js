@@ -1,7 +1,8 @@
 import React from "react";
 import { FiRepeat, FiHeart, FiMessageCircle, FiShare } from "react-icons/fi";
 import styled from "styled-components";
-
+import ActionButton from "./ActionButton";
+import PoppingCircle from "./PoppingCircle";
 const ActionBar = ({
   isLiked,
   setIsLiked,
@@ -10,57 +11,61 @@ const ActionBar = ({
   tweetId,
   numberOfRetweets,
 }) => {
+  const LikeFunction = (ev) => {
+    ev.stopPropagation();
+    const valueToSet = !isLiked;
+    console.log(valueToSet);
+    if (isLiked) {
+      setNumberOfLikes(numberOfLikes - 1);
+      setIsLiked(!isLiked);
+    } else {
+      setNumberOfLikes(numberOfLikes + 1);
+      setIsLiked(!isLiked);
+    }
+    fetch(`/api/tweet/${tweetId}/like`, {
+      method: "PUT",
+      body: JSON.stringify({
+        like: valueToSet,
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
   return (
     <Wrapper>
       <ButtonWrapper>
-        <StyledButton>
+        <ActionButton color="blue">
           <FiMessageCircle />
-        </StyledButton>
+        </ActionButton>
       </ButtonWrapper>
       <ButtonWrapper>
-        <StyledButton>
+        <ActionButton color="green">
           <FiRepeat />
-          {numberOfRetweets !== 0 ? <span>{numberOfRetweets}</span> : null}
-        </StyledButton>
+          {numberOfRetweets !== 0 ? <Number>{numberOfRetweets}</Number> : null}
+        </ActionButton>
       </ButtonWrapper>
       <ButtonWrapper>
-        <StyledButton
-          onClick={(ev) => {
-            ev.stopPropagation();
-            const valueToSet = !isLiked;
-            console.log(valueToSet);
-            if (isLiked) {
-              setNumberOfLikes(numberOfLikes - 1);
-              setIsLiked(!isLiked);
-            } else {
-              setNumberOfLikes(numberOfLikes + 1);
-              setIsLiked(!isLiked);
-            }
-            fetch(`/api/tweet/${tweetId}/like`, {
-              method: "PUT",
-              body: JSON.stringify({
-                like: valueToSet,
-              }),
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-            })
-              .then((res) => res.json())
-              .then((data) => console.log(data));
-          }}
-          onKeyDown={(ev) => {
-            ev.stopPropagation();
-          }}
-        >
-          <FiHeart fill={isLiked ? "red" : "white"} />
-        </StyledButton>
-        {numberOfLikes !== 0 ? <span>{numberOfLikes}</span> : null}
+        <ActionButton onClick={LikeFunction} color="red">
+          {isLiked && <PoppingCircle color="purple"></PoppingCircle>}
+          <FiHeart
+            fill={isLiked ? "red" : "white"}
+            style={{
+              transition: "500ms",
+              position: "relative",
+              zIndex: "1",
+            }}
+          />
+        </ActionButton>
+        {numberOfLikes !== 0 ? <Number>{numberOfLikes}</Number> : null}
       </ButtonWrapper>
       <ButtonWrapper>
-        <StyledButton>
+        <ActionButton color="teal">
           <FiShare />
-        </StyledButton>
+        </ActionButton>
       </ButtonWrapper>
     </Wrapper>
   );
@@ -74,10 +79,8 @@ const Wrapper = styled.div`
 `;
 const ButtonWrapper = styled.div``;
 
-const StyledButton = styled.button`
-  border: none;
-  background: none;
-  cursor: pointer;
+const Number = styled.span`
+  position: absolute;
 `;
 
 export default ActionBar;
