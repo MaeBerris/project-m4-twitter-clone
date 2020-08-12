@@ -12,16 +12,31 @@ const ProfileInfoGrid = () => {
   return (
     <Wrapper>
       <div>
-        <FiMapPin /> {profile.location}
+        {profile.location ? (
+          <div>
+            <FiMapPin /> {profile.location}{" "}
+          </div>
+        ) : (
+          <div>
+            <FiCalendar /> {`Joined ${date}`}
+          </div>
+        )}
       </div>
       <div>
-        <FiCalendar /> {`Joined ${date}`}
+        {profile.location ? (
+          <div>
+            <FiCalendar /> {`Joined ${date}`}
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
       <div>
         <Number>{profile.numFollowing}</Number> Following
       </div>
       <div>
-        <Number>{profile.numFollowers}</Number> Followers
+        <Number>{profile.numFollowers}</Number> Follower
+        {profile.numFollowers > 1 ? "s" : ""}
       </div>
     </Wrapper>
   );

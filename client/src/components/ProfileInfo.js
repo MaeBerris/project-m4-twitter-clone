@@ -4,6 +4,7 @@ import COLORS from "../constants";
 import ProfileHandleInfo from "./ProfileHandleInfo";
 import ProfileInfoGrid from "./ProfileInfoGrid";
 import { ProfileContext } from "../ProfileContext";
+import ProfileFooter from "./ProfileFooter";
 
 const ProfileInfo = () => {
   const { profileData } = React.useContext(ProfileContext);
@@ -21,11 +22,7 @@ const ProfileInfo = () => {
           <Bio>{profile.bio}</Bio>
           <ProfileInfoGrid />
         </InfoWrapper>
-        <Footer>
-          <Page1>Tweets</Page1>
-          <Page>Media</Page>
-          <Page>Likes</Page>
-        </Footer>
+        <ProfileFooter />
       </Wrapper>
     </BigWrapper>
   );
@@ -86,25 +83,4 @@ const StyledButton = styled.button`
 const Bio = styled.p`
   margin: 10px 0;
   line-height: 130%;
-`;
-
-const Footer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  font-weight: 650;
-`;
-
-const Page = styled.div`
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid ${COLORS.divider};
-`;
-
-const Page1 = styled.div`
-  color: ${COLORS.primary};
-  padding: 15px 0;
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid ${COLORS.primary};
 `;
