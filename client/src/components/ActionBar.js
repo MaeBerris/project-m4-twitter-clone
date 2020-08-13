@@ -35,15 +35,19 @@ const ActionBar = ({
       .then((res) => res.json())
       .then((data) => console.log(data));
   };
+
+  const stopProp = (ev) => {
+    ev.stopPropagation();
+  };
   return (
     <Wrapper>
       <ButtonWrapper>
-        <ActionButton color="blue">
+        <ActionButton onClick={stopProp} color="blue">
           <FiMessageCircle />
         </ActionButton>
       </ButtonWrapper>
       <ButtonWrapper>
-        <ActionButton color="green">
+        <ActionButton onClick={stopProp} color="green">
           <FiRepeat />
         </ActionButton>
         {numberOfRetweets !== 0 ? <Number>{numberOfRetweets}</Number> : null}
@@ -63,7 +67,7 @@ const ActionBar = ({
         {numberOfLikes !== 0 ? <Number>{numberOfLikes}</Number> : null}
       </ButtonWrapper>
       <ButtonWrapper>
-        <ActionButton color="teal">
+        <ActionButton onClick={stopProp} color="teal">
           <FiShare />
         </ActionButton>
       </ButtonWrapper>

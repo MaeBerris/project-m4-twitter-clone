@@ -30,7 +30,7 @@ const useSetFeed = (object) => {
     return () => {
       statusSettingFunction("loading");
     };
-  }, []);
+  }, [url, dataSettingFunction, statusSettingFunction, errorSettingFunction]);
 };
 
 export default useSetFeed;

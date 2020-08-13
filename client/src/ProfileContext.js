@@ -19,7 +19,7 @@ const ProfileContextProvider = ({ children }) => {
         setProfileData(data);
         setStatus("idle");
       });
-  }, []);
+  }, [profileId]);
 
   return (
     <ProfileContext.Provider
