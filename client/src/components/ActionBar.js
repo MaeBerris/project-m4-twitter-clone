@@ -45,8 +45,8 @@ const ActionBar = ({
       <ButtonWrapper>
         <ActionButton color="green">
           <FiRepeat />
-          {numberOfRetweets !== 0 ? <Number>{numberOfRetweets}</Number> : null}
         </ActionButton>
+        {numberOfRetweets !== 0 ? <Number>{numberOfRetweets}</Number> : null}
       </ButtonWrapper>
       <ButtonWrapper>
         <ActionButton onClick={LikeFunction} color="red">
@@ -81,6 +81,7 @@ const ButtonWrapper = styled.div``;
 
 const Number = styled.span`
   position: absolute;
+  margin-top: 2px;
 `;
 
 export default ActionBar;

@@ -14,6 +14,7 @@ import Spinner from "./Spinner";
 import ProfileContextProvider from "../ProfileContext";
 import COLORS from "../constants";
 import ErrorScreen from "./ErrorScreen";
+import HomeHeader from "./HomeHeader";
 
 function App() {
   const { status, error } = React.useContext(CurrentUserContext);
@@ -46,7 +47,14 @@ function App() {
                 <ErrorScreen errorType="profile loading" />
               ) : (
                 <div>
-                  {status !== "loading" ? <TweetComposeBox /> : <Spinner />}
+                  {status !== "loading" ? (
+                    <div>
+                      <HomeHeader />
+                      <TweetComposeBox />
+                    </div>
+                  ) : (
+                    <Spinner />
+                  )}
                   {status !== "loading" ? (
                     <HomeFeed url="/api/me/home-feed" />
                   ) : null}

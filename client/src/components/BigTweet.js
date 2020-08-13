@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import COLORS from "../constants";
 import ActionBar from "./ActionBar";
+import BigTweetHeader from "./BigTweetHeader";
 
 const BigTweet = ({ tweetData }) => {
   const { author } = tweetData;
@@ -12,30 +13,33 @@ const BigTweet = ({ tweetData }) => {
   const [numberOfLikes, setNumberOfLikes] = React.useState(tweetData.numLikes);
   const [numberOfRetweets] = React.useState(tweetData.numRetweets);
   return (
-    <Wrapper>
-      <Header>
-        <Avatar src={author.avatarSrc} />
-        <HandleWrapper>
-          <DisplayName to={`/${author.handle}`}>
-            {author.displayName}
-          </DisplayName>
-          <Handle>@{author.handle}</Handle>
-        </HandleWrapper>
-      </Header>
-      <Status>{tweetData.status}</Status>
-      {tweetData.media.length > 0 && (
-        <StyledImg src={tweetData.media[0].url}></StyledImg>
-      )}
-      <Footer>{date} - Critter Web App</Footer>
-      <ActionBar
-        isLiked={isLiked}
-        setIsLiked={setIsLiked}
-        numberOfLikes={numberOfLikes}
-        setNumberOfLikes={setNumberOfLikes}
-        tweetId={tweetData.id}
-        numberOfRetweet={numberOfRetweets}
-      />
-    </Wrapper>
+    <div>
+      <BigTweetHeader />
+      <Wrapper>
+        <Header>
+          <Avatar src={author.avatarSrc} />
+          <HandleWrapper>
+            <DisplayName to={`/${author.handle}`}>
+              {author.displayName}
+            </DisplayName>
+            <Handle>@{author.handle}</Handle>
+          </HandleWrapper>
+        </Header>
+        <Status>{tweetData.status}</Status>
+        {tweetData.media.length > 0 && (
+          <StyledImg src={tweetData.media[0].url}></StyledImg>
+        )}
+        <Footer>{date} - Critter Web App</Footer>
+        <ActionBar
+          isLiked={isLiked}
+          setIsLiked={setIsLiked}
+          numberOfLikes={numberOfLikes}
+          setNumberOfLikes={setNumberOfLikes}
+          tweetId={tweetData.id}
+          numberOfRetweet={numberOfRetweets}
+        />
+      </Wrapper>
+    </div>
   );
 };
 
