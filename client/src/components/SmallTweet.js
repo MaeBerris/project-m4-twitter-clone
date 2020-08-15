@@ -32,7 +32,7 @@ const SmallTweet = ({ tweetData }) => {
       {tweetData.retweetFrom && (
         <Retweet>
           <RetweetIcon />
-          {tweetData.retweetFrom.handle}
+          {tweetData.retweetFrom.handle} ReMeowed
         </Retweet>
       )}
       <Wrapper>
