@@ -13,8 +13,15 @@ const TweetComposeBox = () => {
   const [error, setError] = React.useState(false);
   const { setFeed, setFeedError } = React.useContext(HomeFeedContext);
   const [loadState, setLoadState] = React.useState("idle");
+  const ref = React.useRef(null);
   const message =
     "I'm sorry, something went wrong while sending your tweet, please try again !";
+
+  React.useEffect(() => {
+    if (value === "") {
+      ref.current.focus();
+    }
+  }, [value]);
 
   const FetchRequest = () => {
     setLoadState("loading");
@@ -32,7 +39,6 @@ const TweetComposeBox = () => {
     })
       .then((res) => {
         if (!res.ok) {
-          console.log(res.status);
           setLoadState("idle");
           setError(true);
           throw Error("Tweet post server error");
@@ -47,7 +53,6 @@ const TweetComposeBox = () => {
       })
       .catch((err) => console.log(err))
       .then((data) => {
-        console.log(data);
         return fetch("/api/me/home-feed", {
           method: "GET",
           headers: {
@@ -74,6 +79,7 @@ const TweetComposeBox = () => {
         <Avatar src={currentUser.avatarSrc} />
         <form>
           <TextInput
+            ref={ref}
             placeholder="What's happening ?"
             value={value}
             onChange={(ev) => {

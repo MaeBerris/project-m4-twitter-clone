@@ -14,7 +14,6 @@ const ActionBar = ({
   const LikeFunction = (ev) => {
     ev.stopPropagation();
     const valueToSet = !isLiked;
-    console.log(valueToSet);
     if (isLiked) {
       setNumberOfLikes(numberOfLikes - 1);
       setIsLiked(!isLiked);
@@ -33,7 +32,8 @@ const ActionBar = ({
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => data)
+      .catch((err) => console.log(err));
   };
 
   const stopProp = (ev) => {
